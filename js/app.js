@@ -65,3 +65,4 @@ function game() {
     return "No one wins!";
   }
 }
+console.log(game());
