@@ -35,3 +35,33 @@ function round(playerSelection, computerSelection) {
     return "Draw";
   }
 }
+//The function games is to play 5 round game that keeps score and reports a winner or loser
+function game() {
+  //Variable for scores
+  let playerScore = 0;
+  let computerScore = 0;
+  for (let i = 0; i < 5; i++) {
+    //Use prompt to get player choice
+    let playerChoice = prompt("Enter either Rock, Paper or Scissors: ");
+    //Use function to get computer choice
+    let computerChoice = getComputerChoice();
+    //Store results in a variable
+    let result = round(playerChoice, computerChoice);
+    //Log the result
+    console.log(result);
+    //Record score
+    if (result.charAt(4) === "W") {
+      playerScore++;
+    } else if (result.charAt(4) === "L") {
+      computerScore++;
+    }
+  }
+  //Return the total score
+  if (playerScore > computerScore) {
+    return "The human wins!";
+  } else if (playerScore < computerScore) {
+    return "The computer wins!";
+  } else {
+    return "No one wins!";
+  }
+}
