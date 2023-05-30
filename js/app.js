@@ -1,3 +1,5 @@
+let playerScore = 0;
+let computerScore = 0;
 function getComputerChoice() {
   //stance stores the random number and compares it to 0, 1 or 2
   let stance = Math.floor(Math.random() * 3);
@@ -14,24 +16,28 @@ function getComputerChoice() {
 }
 //function round takes two parameters, playerSelection which records the selection
 //computerSelection records the computer choice got from getComputerChoice()
-let playerScore = 0;
-let computerScore = 0;
 function round(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   computerSelection = computerSelection.toLowerCase();
   //two variables are converted to lowercase
   //playerSelection and computerSelection are compared
   if (playerSelection === "rock" && computerSelection === "scissors") {
+    playerScore++;
     return "You Win! Rock beats Scissors";
   } else if (playerSelection === "rock" && computerSelection === "paper") {
+    computerScore++;
     return "You Lose! Paper beats Rock";
   } else if (playerSelection === "paper" && computerSelection === "rock") {
+    playerScore++;
     return "You Win! Paper beats Rock";
   } else if (playerSelection === "paper" && computerSelection === "scissors") {
+    computerScore++;
     return "You Lose! Scissors beats Paper";
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
+    playerScore++;
     return "You Win! Scissors beats Paper";
   } else if (playerSelection === "scissors" && computerSelection === "rock") {
+    computerScore++;
     return "You Lose! Rock beats Scissors";
   } else {
     return "Draw";
@@ -39,10 +45,13 @@ function round(playerSelection, computerSelection) {
 }
 let buttons = document.querySelectorAll("button");
 let currentResult = document.querySelector("#currentResult");
+let scoreResult = document.querySelector("#totalResult");
 buttons.forEach((button) => {
   button.addEventListener("click", function (e) {
     let stance = this.getAttribute("data-stance");
-    currentResult.textContent = `${round(stance, getComputerChoice())}`;
+    let current = round(stance, getComputerChoice());
+    currentResult.textContent = `${current}`;
+    scoreResult.textContent = `Player ${playerScore}, Computer ${computerScore}`;
   });
 });
 //The function games is to play 5 round game that keeps score and reports a winner or loser
