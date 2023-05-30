@@ -14,6 +14,8 @@ function getComputerChoice() {
 }
 //function round takes two parameters, playerSelection which records the selection
 //computerSelection records the computer choice got from getComputerChoice()
+let playerScore = 0;
+let computerScore = 0;
 function round(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   computerSelection = computerSelection.toLowerCase();
@@ -35,34 +37,41 @@ function round(playerSelection, computerSelection) {
     return "Draw";
   }
 }
+let buttons = document.querySelectorAll("button");
+let currentResult = document.querySelector("#currentResult");
+buttons.forEach((button) => {
+  button.addEventListener("click", function (e) {
+    let stance = this.getAttribute("data-stance");
+    currentResult.textContent = `${round(stance, getComputerChoice())}`;
+  });
+});
 //The function games is to play 5 round game that keeps score and reports a winner or loser
-function game() {
-  //Variable for scores
-  let playerScore = 0;
-  let computerScore = 0;
-  for (let i = 0; i < 5; i++) {
-    //Use prompt to get player choice
-    let playerChoice = prompt("Enter either Rock, Paper or Scissors: ");
-    //Use function to get computer choice
-    let computerChoice = getComputerChoice();
-    //Store results in a variable
-    let result = round(playerChoice, computerChoice);
-    //Log the result
-    console.log(result);
-    //Record score
-    if (result.charAt(4) === "W") {
-      playerScore++;
-    } else if (result.charAt(4) === "L") {
-      computerScore++;
-    }
-  }
-  //Return the total score
-  if (playerScore > computerScore) {
-    return "The human wins!";
-  } else if (playerScore < computerScore) {
-    return "The computer wins!";
-  } else {
-    return "No one wins!";
-  }
-}
-console.log(game());
+// function game() {
+//   //Variable for scores
+//   let playerScore = 0;
+//   let computerScore = 0;
+//   for (let i = 0; i < 5; i++) {
+//     //Use prompt to get player choice
+//     let playerChoice = prompt("Enter either Rock, Paper or Scissors: ");
+//     //Use function to get computer choice
+//     let computerChoice = getComputerChoice();
+//     //Store results in a variable
+//     let result = round(playerChoice, computerChoice);
+//     //Log the result
+//     console.log(result);
+//     //Record score
+//     if (result.charAt(4) === "W") {
+//       playerScore++;
+//     } else if (result.charAt(4) === "L") {
+//       computerScore++;
+//     }
+//   }
+//   //Return the total score
+//   if (playerScore > computerScore) {
+//     return "The human wins!";
+//   } else if (playerScore < computerScore) {
+//     return "The computer wins!";
+//   } else {
+//     return "No one wins!";
+//   }
+// }
